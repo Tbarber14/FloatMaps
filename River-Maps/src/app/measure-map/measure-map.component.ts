@@ -40,20 +40,23 @@ export class MeasureMapComponent {
     this.allMarkers[this.allMarkers.length]=[event.coords.lat, event.coords.lng];
     console.log(this.calcCrow(this.allMarkers[0][0], this.allMarkers[0][1], this.allMarkers[1][0], this.allMarkers[1][1]));
     console.log(this.calcTotal());
-    this.changeBannerDistance(this.calcTotal());
+    this.changeBannerDistance();
   }
 
-  changeBannerDistance(totalDistance: number){
+  changeBannerDistance(){
+    let totalDistance = this.calcTotal()
     let roundedDistance = Math.round(totalDistance * 100)/100
     document.getElementById('distanceTotal')!.innerHTML = "Total Distance: " + roundedDistance + " miles";
   }
 
   deletePolyPoint(){
     this.allMarkers.pop();
+    this.changeBannerDistance()
   }
 
   deleteAllPolyPoints(){
     this.allMarkers = [];
+    this.changeBannerDistance()
   }
   // Finds the distance of all points recorded in the allMarkers array by order they were pushed to the array
   calcTotal(){
