@@ -1,0 +1,104 @@
+<br>
+<div class='container justify-content-center' >
+    <div class='card-header text-white' style="background-color: black;" >
+        <h3 class='card-title' style="text-align: center;">Admin Register</h3>
+    </div> 
+    
+    <div class='login-body'>
+</div>
+        <!--[mustMatch]="['userPass', 'confirmPassword' ]-->
+        <form #userForm='ngForm' (ngSubmit)="createUser()" >
+
+            <div class='form-group'>
+                <label for='name'>Name</label>
+
+                <input 
+                    class='form-control'
+                    type='text'
+                    id='name'
+                    name='name'
+                    #fullName='ngModel'
+                    [ngClass]="{ 'is-invalid': fullName.touched && fullName.invalid}"
+                    required
+                    minlength="3"
+                    [(ngModel)]='usersName'/>
+                                <!-- error handling for username-->
+                 <span *ngIf='fullName.touched && fullName.invalid && fullName.errors?.required' class='invalid-feedback'>
+                    name is required.
+                </span>
+                <span *ngIf='fullName.touched && fullName.invalid && fullName.errors?.minlength' class='invalid-feedback'>
+                    a min length of 3 is required.
+                </span>
+            </div>
+
+            <div class='form-group'>
+                <label for='email'>Email</label>
+
+                <input 
+                    class='form-control'
+                    type='text'
+                    id='email'
+                    name='email'
+                    #loginName='ngModel'
+                    [ngClass]="{ 'is-invalid': loginName.touched && loginName.invalid}"
+                    required
+                    email
+                    [(ngModel)]='email'/>
+                                <!-- error handling for username-->
+                 <span *ngIf='loginName.touched && loginName.invalid && loginName.errors?.required' class='invalid-feedback'>
+                    Email is required.
+                </span>
+                <span *ngIf='loginName.touched && loginName.invalid && loginName.errors?.email' class='invalid-feedback'>
+                    A proper email is required.
+                </span>
+            </div>
+
+
+
+            <!-- password-->
+
+            <div class='form-group'>
+                <label for='userPassword'>Password</label>
+                <input 
+                    class='form-control'    
+                    type="password" 
+                    id='userPass'
+                    name='userPass'
+                    #uPassword='ngModel'
+                    [ngClass]=" { 'is-invalid' : uPassword.touched && uPassword.invalid  }"
+                    required
+                    minlength="6"
+                    [(ngModel)]='password'/>
+
+                <span *ngIf='uPassword.touched && uPassword.invalid && uPassword.errors?.required' class='invalid-feedback'>
+                    password is required.
+                </span>
+                <span *ngIf='uPassword.touched && uPassword.invalid && uPassword.errors?.minlength' class='invalid-feedback'>
+                    password of length 6 or more is recquired.
+                </span>
+
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input 
+                    type="password" 
+                    name="confirmPassword" 
+                    class="form-control"
+                    required
+                    #cPassword="ngModel"
+                    [ngClass]="{ 'is-invalid': cPassword.touched && cPassword.errors}"
+                    [(ngModel)]="confirmPassword">
+                <span *ngIf="cPassword.touched && cPassword.errors?.required" class="invalid-feedback">
+                    Password is required.
+                </span>
+            </div>
+
+            <!-- submit button -->
+            <div class='card-footer' style="text-align: center;">
+                <button class='btn btn-primary' [disabled]='userForm.invalid' style="background-color: black">Register</button>
+                <p>Already have an account? <a href="#" style = "text-decoration: underline;" routerLink = "/login">Login here!</a></p>
+            </div> 
+        </form>
+
+    </div>
