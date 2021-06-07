@@ -3,7 +3,7 @@
 
     <div class="head" style="background-color: black;">
         <div class='card-header text-white' >
-            <h3 class='card-title'>User login</h3>
+            <h3 class='card-title' style="text-align: center;">User login</h3>
         </div> 
     </div>
     
@@ -13,7 +13,7 @@
         <div *ngIf="registered == true" class="text-success">User registered successfully!</div>
         <form #userForm='ngForm' (ngSubmit)='handleSubmit()'>
             <div class='form-group'>
-                <label for='userName'>Username/Email</label>
+                <label for='userName'>Email</label>
 
                 <input 
                     class='form-control'
