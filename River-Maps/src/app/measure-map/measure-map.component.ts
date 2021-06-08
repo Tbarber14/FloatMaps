@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { AuthService } from '../services/auth.service';
+import { UserTripsService } from '../services/user-trips.service';
 
 @Component({
   selector: 'app-measure-map',
@@ -10,32 +11,43 @@ import { AuthService } from '../services/auth.service';
 })
 
 export class MeasureMapComponent {
-  title = 'My first AGM project';
+
   allMarkers: [number, number][] =[];
   lat = 36.1627;
   lng = -86.7816;
+  markersPlaced: boolean = false;
+  
+  title: String = "";
+  description: String = "";
+  publishDate: String = "";
+  image: String = "";
+
 
   map!: google.maps.Map<Element>;
-  mapClickListener!: google.maps.MapsEventListener;
-  zone: any;
 
-  constructor(private readonly geolocation$: GeolocationService, private auth: AuthService, private router:Router){
+  constructor(private readonly geolocation$: GeolocationService, private auth: AuthService, private router:Router, private tripService: UserTripsService){
+    // Finds the users coordinates
     geolocation$.subscribe(position => {this.lat = position.coords.latitude; this.lng = position.coords.longitude});
   }
 
   ngOnInit(): void {
+    // Checks if the user is logged in
     if(this.auth.retrieveUser() == null){
       this.router.navigate(['/login']);
     }
   }
   
+  //Initializes map
   mapReady(event: any) {
     this.map = event;
     this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('milesBanner')  as HTMLInputElement);
+    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('SaveMap')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DeleteLast')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DeleteAll')  as HTMLInputElement);
+    document.getElementById('distanceTotal')!.innerHTML = 0 + " miles";
 }
 
+// Gets coordinate info from map, updates allMarkers and calculates the total distance between the first and last marker
   public pickNextLocation(event: any): void{
     this.allMarkers[this.allMarkers.length]=[event.coords.lat, event.coords.lng];
     console.log(this.calcCrow(this.allMarkers[0][0], this.allMarkers[0][1], this.allMarkers[1][0], this.allMarkers[1][1]));
@@ -43,21 +55,29 @@ export class MeasureMapComponent {
     this.changeBannerDistance();
   }
 
+  //Updates the total distance, from first to last marker, in the banner at the top of map
   changeBannerDistance(){
     let totalDistance = this.calcTotal()
     let roundedDistance = Math.round(totalDistance * 100)/100
-    document.getElementById('distanceTotal')!.innerHTML = "Total Distance: " + roundedDistance + " miles";
+    document.getElementById('distanceTotal')!.innerHTML = roundedDistance + " miles";
   }
 
+  // Deletes last marker placed
   deletePolyPoint(){
     this.allMarkers.pop();
     this.changeBannerDistance()
   }
 
+  //Deletes all markers placed 
   deleteAllPolyPoints(){
     this.allMarkers = [];
     this.changeBannerDistance()
   }
+
+  saveMap(){
+    this.tripService.cacheMap(this.allMarkers);
+  }
+
   // Finds the distance of all points recorded in the allMarkers array by order they were pushed to the array
   calcTotal(){
     var totalDistance = 0;

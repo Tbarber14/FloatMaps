@@ -2,8 +2,8 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <agm-map [latitude]="lat" [longitude]="lng" [clickableIcons] = "false" (mapClick)="pickNextLocation($event)" [mapTypeControl]="true" [disableDefaultUI] = "true" (mapReady)="mapReady($event)">
-    <div class="card" id = "milesBanner"  style="height: 3rem; width: 8rem; margin-top: 5px;">
-      <div class="card-body" id = "distanceTotal">
+    <div class="card" id = "milesBanner" style="height: 3rem; width: 8rem; margin-top: 5px;">
+      <div class="card-body" id = "distanceTotal" style="font-size: 14px; text-align: center;">
       </div>
     </div>
     <agm-marker  *ngFor = "let markers of allMarkers" 
@@ -23,6 +23,7 @@
           >
         </agm-polyline-point>
       </agm-polyline>
+      <button id = "SaveMap" class="toggle-button controls button btn btn-success" (click) = "saveMap()" routerLink = "/save">Save Trip</button>
       <button id = "DeleteLast" class="toggle-button controls button btn btn-warning" (click) = "deletePolyPoint()">Delete Last</button>
       <button id = "DeleteAll" class="toggle-button controls button btn btn-danger" (click) = "deleteAllPolyPoints()">Delete All</button>
 </agm-map>

@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./routes/userRoutes');
+const tripRoutes = require('./routes/tripRoutes')
 
 // If in docker url should be server instead of localhost
 mongoose.connect(
@@ -26,5 +27,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use('/Admin', userRoutes)
+app.use('/Trips', tripRoutes)
 
 module.exports = app

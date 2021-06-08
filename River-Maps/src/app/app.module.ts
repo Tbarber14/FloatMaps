@@ -9,9 +9,10 @@ import { MeasureMapComponent } from './measure-map/measure-map.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginHeaderComponent } from './login-header/login-header.component';
+import { SaveMapComponent } from './save-map/save-map.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginHeaderComponent } from './login-header/login-header.component';
     NavigationComponent,
     LoginComponent,
     RegisterComponent,
-    LoginHeaderComponent
+    LoginHeaderComponent,
+    SaveMapComponent
   ],
   imports: [
     BrowserModule,
