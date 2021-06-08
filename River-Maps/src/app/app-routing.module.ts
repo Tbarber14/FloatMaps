@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MeasureMapComponent } from './measure-map/measure-map.component';
 import { RegisterComponent } from './register/register.component';
+import { SaveMapComponent } from './save-map/save-map.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:"map",
     component: MeasureMapComponent
+  },
+  {
+    path:"save",
+    component: SaveMapComponent
   },
   {
     path:"**",
