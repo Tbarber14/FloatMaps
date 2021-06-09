@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 const allTripsUrl = 'http://localhost:3000/Trips/getTrips'
 const addTripUrl = 'http://localhost:3000/Trips/addTrips'
+const yourTripsUrl = 'http://localhost:3000/Trips/yourTrips'
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,6 @@ export class UserTripsService {
   }
 
   findTripByEmail(email: any){
-
+    return this.http.get(yourTripsUrl + "/" + email);
   }
 }

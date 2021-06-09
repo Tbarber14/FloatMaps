@@ -8,6 +8,16 @@ router.get('/getTrips', (req, res) => {
     })
 })
 
+router.get('/yourTrips/:email', (req, res) => {
+    console.log("Email: ")
+    console.log(req.params.email);
+    let email = req.params.email;
+    Trips.find({'email' : email}, (err, result) => {
+        if(err) res.send('Error finding trips!!');
+        else res.send(result);
+    })
+})
+
 router.post('/addTrips', (req, res) => {
   console.log("req.body = ",req.body)
   Trips.create(req.body, (err, result) => {

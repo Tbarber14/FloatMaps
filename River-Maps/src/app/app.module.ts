@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginHeaderComponent } from './login-header/login-header.component';
 import { SaveMapComponent } from './save-map/save-map.component';
+import { ViewTripsComponent } from './view-trips/view-trips.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SaveMapComponent } from './save-map/save-map.component';
     LoginComponent,
     RegisterComponent,
     LoginHeaderComponent,
-    SaveMapComponent
+    SaveMapComponent,
+    ViewTripsComponent
   ],
   imports: [
     BrowserModule,
