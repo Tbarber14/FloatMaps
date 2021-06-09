@@ -6,7 +6,7 @@ const TripSchema = new mongoose.Schema ({
     description: { type: String, required: true},
     image: { type: String, required: true},
     publishDate: { type: Date, required: true},
-    allMarkers: { type: [Number, Number], required: true}
+    allMarkers: { type: [Array], required: true}
 })
 
 const Trip = mongoose.model('Trip', TripSchema, 'tripInfo');

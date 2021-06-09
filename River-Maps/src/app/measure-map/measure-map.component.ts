@@ -13,6 +13,8 @@ import { UserTripsService } from '../services/user-trips.service';
 export class MeasureMapComponent {
 
   allMarkers: [number, number][] =[];
+
+  //Default coords
   lat = 36.1627;
   lng = -86.7816;
   markersPlaced: boolean = false;
@@ -50,8 +52,6 @@ export class MeasureMapComponent {
 // Gets coordinate info from map, updates allMarkers and calculates the total distance between the first and last marker
   public pickNextLocation(event: any): void{
     this.allMarkers[this.allMarkers.length]=[event.coords.lat, event.coords.lng];
-    console.log(this.calcCrow(this.allMarkers[0][0], this.allMarkers[0][1], this.allMarkers[1][0], this.allMarkers[1][1]));
-    console.log(this.calcTotal());
     this.changeBannerDistance();
   }
 
@@ -74,8 +74,12 @@ export class MeasureMapComponent {
     this.changeBannerDistance()
   }
 
+  // Caches markers on the map for the save component to use and navigate to the save component if there are more than 1 markers
   saveMap(){
-    this.tripService.cacheMap(this.allMarkers);
+    if(this.allMarkers.length > 1){
+      this.tripService.cacheMap(this.allMarkers);
+      this.router.navigate(['/save']);
+    }
   }
 
   // Finds the distance of all points recorded in the allMarkers array by order they were pushed to the array

@@ -50,7 +50,6 @@ export class SaveMapComponent implements OnInit {
 
     this.tripService.addTrip(tripInfo)
       .subscribe(user => {
-        this.auth.storeUser(user);
         this.router.navigate(['./map']);
       }, err => {
         if(err){
