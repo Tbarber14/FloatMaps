@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 export class NavigationComponent implements OnInit {
   event$
   onMap : boolean = true;
+  onDetails : boolean = false;
 
   constructor(private auth: AuthService, private router: Router, private Location: Location) {
     this.event$
@@ -19,11 +20,17 @@ export class NavigationComponent implements OnInit {
             (event: NavigationEvent) => {
               if(event instanceof NavigationEnd) {
                 let location = this.Location.path();
-                if(location != "/map"){
+                if(location == "/map"){
+                  this.onMap = true;
+                  this.onDetails = false;
+                }
+                else if(location == '/details'){
                   this.onMap = false;
+                  this.onDetails = true;
                 }
                 else{
-                  this.onMap = true;
+                  this.onMap = false;
+                  this.onDetails = false;
                 }
               }
             });
