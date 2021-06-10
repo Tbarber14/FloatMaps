@@ -22,7 +22,7 @@
                     [ngClass]="{ 'is-invalid': theTitle.touched && theTitle.invalid}"
                     required
                     minlength="10"
-                    [(ngModel)]='title'/>
+                    [(ngModel)]='this.trip.title'/>
                                 <!-- error handling for title-->
                 <span *ngIf='theTitle.touched && theTitle.invalid && theTitle.errors?.required' class='invalid-feedback'>
                     Title is required.
@@ -45,7 +45,7 @@
                     #theDescription='ngModel'
                     [ngClass]=" { 'is-invalid' : theDescription.touched && theDescription.invalid  }"
                     required
-                    [(ngModel)]='description'/>
+                    [(ngModel)]='this.trip.description'/>
                     <span *ngIf='theDescription.touched && theDescription.invalid || theDescription.errors?.required' class='invalid-feedback'>
                         A description is required.
                     </span>
@@ -63,7 +63,7 @@
                     #theImage='ngModel'
                     [ngClass]=" { 'is-invalid' : theImage.touched && theImage.invalid  }"
                     required
-                    [(ngModel)]='image'/>
+                    [(ngModel)]='this.trip.image'/>
                     <span *ngIf='theImage.touched && theImage.invalid || theImage.errors?.required' class='invalid-feedback'>
                         An image is required.
                     </span>

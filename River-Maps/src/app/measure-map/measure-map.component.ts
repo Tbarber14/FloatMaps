@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
+import { Trip } from 'src/models/Trip';
 import { AuthService } from '../services/auth.service';
 import { UserTripsService } from '../services/user-trips.service';
 
@@ -17,11 +18,11 @@ export class MeasureMapComponent {
   //Default coords
   lat = 36.1627;
   lng = -86.7816;
+  roundedDistance: number = 0;
   markersPlaced: boolean = false;
   
   title: String = "";
   description: String = "";
-  publishDate: String = "";
   image: String = "";
 
 
@@ -58,8 +59,8 @@ export class MeasureMapComponent {
   //Updates the total distance, from first to last marker, in the banner at the top of map
   changeBannerDistance(){
     let totalDistance = this.calcTotal()
-    let roundedDistance = Math.round(totalDistance * 100)/100
-    document.getElementById('distanceTotal')!.innerHTML = roundedDistance + " miles";
+    this.roundedDistance = Math.round(totalDistance * 100)/100
+    document.getElementById('distanceTotal')!.innerHTML = this.roundedDistance + " miles";
   }
 
   // Deletes last marker placed
@@ -76,8 +77,21 @@ export class MeasureMapComponent {
 
   // Caches markers on the map for the save component to use and navigate to the save component if there are more than 1 markers
   saveMap(){
+
+    let tripInfo : Trip = {
+      
+      email: this.auth.retrieveUser().email,
+      title: this.title,
+      description: this.description,
+      image: this.image,
+      publishDate: new Date(),
+      distance : this.roundedDistance,
+      allMarkers: this.allMarkers,
+    }
+
     if(this.allMarkers.length > 1){
-      this.tripService.cacheMap(this.allMarkers);
+      this.tripService.cacheTrip(tripInfo);
+
       this.router.navigate(['/save']);
     }
   }

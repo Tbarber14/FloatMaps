@@ -13,6 +13,7 @@ export class UserTripsService {
 
   allMarkers: [number, number][] =[];
   trip!: Trip;
+  distance!: number;
 
   constructor(private http: HttpClient) { }
 

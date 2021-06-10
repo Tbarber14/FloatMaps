@@ -6,6 +6,7 @@ const TripSchema = new mongoose.Schema ({
     description: { type: String, required: true},
     image: { type: String, required: true},
     publishDate: { type: Date, required: true},
+    distance: {type: Number, required: true},
     allMarkers: { type: [Array], required: true}
 })
 

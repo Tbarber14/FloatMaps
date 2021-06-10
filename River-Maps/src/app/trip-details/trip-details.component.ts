@@ -42,6 +42,13 @@ export class TripDetailsComponent implements OnInit {
     this.lng = centerMap[1];
   }
 
+    //Initializes map
+    mapReady(event: any) {
+      this.map = event;
+      this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('milesBanner')  as HTMLInputElement);
+      document.getElementById('distanceTotal')!.innerHTML = this.tripInfo.distance + " miles";
+  }
+
   getTrip(){
     this.tripInfo = this.tripService.getTripCache();
   }
