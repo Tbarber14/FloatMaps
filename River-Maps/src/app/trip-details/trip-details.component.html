@@ -1,0 +1,21 @@
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng" [clickableIcons] = "false" [mapTypeControl]="true" [disableDefaultUI] = "true">
+    <agm-marker  *ngFor = "let markers of tripInfo.allMarkers" 
+        [latitude]="markers[0]" 
+        [longitude]="markers[1]"
+        iconUrl= "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA+ElEQVRIie2Uvw4BQRDGfyck50nwBHciXkWiwqOQ8Aw6TyEKoaVCKQpKhUIk4hQ3F+du3a7NNRJfMtnZ2Z3v2539A3/8GqZAoLGZLXnFgDwA1jqiRWI1jsQ7EpsocjzgLubpBJIr8iU+kX5XkbOSsb6OPC4wjLUAR+lXM3LcbwR8aQ9ATfwTr5KpcowQTXaAvfhjPtffWgBgJP6DV/2LQAvYkD6vyOYq4kVGgo0B7/U03qIhHIBCDkQNoJmInSMnLnC1FCiQvlnK1xzd+zysrRIoA7scyLdA6dN264T/iS35DYO/aGBJ/iB8H1q4wPJL8gvQMyH/I4UnN6+zCMlmnnMAAAAASUVORK5CYII=">
+    </agm-marker>
+    
+    <agm-polyline
+       [visible]="true"
+       [strokeWeight]="3">
+        <agm-polyline-point
+          *ngFor="let marker of tripInfo.allMarkers"
+          [latitude]="marker[0]"
+          [longitude]="marker[1]"
+          >
+        </agm-polyline-point>
+      </agm-polyline>
+</agm-map>

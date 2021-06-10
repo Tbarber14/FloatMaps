@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginHeaderComponent } from './login-header/login-header.component';
 import { SaveMapComponent } from './save-map/save-map.component';
 import { ViewTripsComponent } from './view-trips/view-trips.component';
+import { TripDetailsComponent } from './trip-details/trip-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ViewTripsComponent } from './view-trips/view-trips.component';
     RegisterComponent,
     LoginHeaderComponent,
     SaveMapComponent,
-    ViewTripsComponent
+    ViewTripsComponent,
+    TripDetailsComponent
   ],
   imports: [
     BrowserModule,

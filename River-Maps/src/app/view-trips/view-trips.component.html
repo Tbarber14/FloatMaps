@@ -11,7 +11,7 @@
             <div class=' col-10 justify-content-center' >
                 <div class='row mt-5 justify-content-center'>
                     <div appColor class="col-lg-10" style = "margin-bottom: 15px;" *ngFor='let trip of tripInfo'>
-                        <a class="link-card card" href = "" (click) = "sendToMap()">
+                        <a class="link-card card" href = "" (click) = "viewDetails(trip)" routerLink = "/details">
                             <img class="card-img-top" src="{{trip.image}}" alt="image"/>
                             <div class="card-body" style="text-align: center;">
                                 <div class="row d-flex justify-content-between">
