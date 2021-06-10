@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Trip } from 'src/models/Trip';
 
 const allTripsUrl = 'http://localhost:3000/Trips/getTrips'
 const addTripUrl = 'http://localhost:3000/Trips/addTrips'
@@ -11,9 +12,18 @@ const yourTripsUrl = 'http://localhost:3000/Trips/yourTrips'
 export class UserTripsService {
 
   allMarkers: [number, number][] =[];
+  trip!: Trip;
 
   constructor(private http: HttpClient) { }
 
+  getTripCache(){
+    return this.trip;
+  }
+
+  cacheTrip(trip: Trip){
+    this.trip = trip;
+  }
+  
   cacheMap(map: [number, number][]){
     this.allMarkers = map;
   }
