@@ -33,26 +33,28 @@ router.post('/addTrips', (req, res) => {
 })
 })
 
-// Deletes news by title. You must always use the same title
-router.delete('/delete/:title', (req, res) => {
-    let title = req.params.title;
-    console.log(title);
-    Trips.findOneAndDelete({"title" : title}, (err, result) => {
+// Deletes trips by id
+router.delete('/delete/:id', (req, res) => {
+    let id = req.params.id;
+    console.log("The ID to delete: " + id);
+    Trips.findByIdAndDelete(id, (err, result) => {
         if(err) res.send('Error deleting document!!');
         else res.send({ message : 'Document deleted successfully!!'});
         
     })
 })
 
-// Searches for news by title. You must always use the same title
-router.put('/updateNews',(req,res)=>{
-    Trips.findOneAndUpdate({"title":req.body.title},{
+// Updates trip by id
+router.put('/updateTrip/:id', (req, res) => {
+    let id = req.params.id;
+    Trips.findByIdAndUpdate(id,{
             $set:{
                 title: req.body.title,
                 description: req.body.description,
                 image: req.body.image,
                 publishDate: req.body.publishDate,
-                category: req.body.category
+                distance: req.body.distance,
+                allMarkers: req.body.allMarkers
             }
         },{
             upsert:true

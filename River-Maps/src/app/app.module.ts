@@ -15,6 +15,7 @@ import { LoginHeaderComponent } from './login-header/login-header.component';
 import { SaveMapComponent } from './save-map/save-map.component';
 import { ViewTripsComponent } from './view-trips/view-trips.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TripDetailsComponent } from './trip-details/trip-details.component';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAFE8E_qEMKLVh8xWJkcLNJfQa3_-eQOsU'
-    })
+    }),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
