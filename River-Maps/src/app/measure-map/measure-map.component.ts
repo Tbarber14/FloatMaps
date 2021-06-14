@@ -14,16 +14,19 @@ import { UserTripsService } from '../services/user-trips.service';
 export class MeasureMapComponent {
 
   allMarkers: [number, number][] =[];
+  tripToEdit!: Trip;
 
   //Default coords
   lat = 36.1627;
   lng = -86.7816;
   roundedDistance: number = 0;
   markersPlaced: boolean = false;
+  editTrip: boolean = false;
+  distanceBanner: Number = 0;
   
-  title: String = "";
-  description: String = "";
-  image: String = "";
+  title: string = "";
+  description: string = "";
+  image: string = "";
 
 
   map!: google.maps.Map<Element>;
@@ -38,6 +41,18 @@ export class MeasureMapComponent {
     if(this.auth.retrieveUser() == null){
       this.router.navigate(['/login']);
     }
+
+    //Checks if a trip is being edited
+    if(this.tripService.editTrip){
+      this.tripToEdit = this.tripService.getTripCache();
+      this.editTrip = true;
+      this.allMarkers = this.tripToEdit.allMarkers;
+      this.distanceBanner = this.tripToEdit.distance;
+    }
+
+    else{
+      this.editTrip = false;
+    }
   }
   
   //Initializes map
@@ -47,7 +62,7 @@ export class MeasureMapComponent {
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('SaveMap')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DeleteLast')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DeleteAll')  as HTMLInputElement);
-    document.getElementById('distanceTotal')!.innerHTML = 0 + " miles";
+    document.getElementById('distanceTotal')!.innerHTML = this.distanceBanner + " miles";
 }
 
 // Gets coordinate info from map, updates allMarkers and calculates the total distance between the first and last marker
@@ -59,7 +74,14 @@ export class MeasureMapComponent {
   //Updates the total distance, from first to last marker, in the banner at the top of map
   changeBannerDistance(){
     let totalDistance = this.calcTotal()
-    this.roundedDistance = Math.round(totalDistance * 100)/100
+    if(totalDistance < 1000){
+      this.roundedDistance = Math.round(totalDistance * 100)/100
+    }
+
+    else{
+      this.roundedDistance = Math.round(totalDistance * 1)/1
+    }
+
     document.getElementById('distanceTotal')!.innerHTML = this.roundedDistance + " miles";
   }
 
@@ -78,15 +100,20 @@ export class MeasureMapComponent {
   // Caches markers on the map for the save component to use and navigate to the save component if there are more than 1 markers
   saveMap(){
 
-    let tripInfo : Trip = {
-      
-      email: this.auth.retrieveUser().email,
-      title: this.title,
-      description: this.description,
-      image: this.image,
-      publishDate: new Date(),
-      distance : this.roundedDistance,
-      allMarkers: this.allMarkers,
+    if(this.editTrip){
+      var tripInfo = this.tripToEdit;
+    }
+    else{
+      var tripInfo : Trip = {
+        _id: "",
+        email: this.auth.retrieveUser().email,
+        title: this.title,
+        description: this.description,
+        image: this.image,
+        publishDate: new Date(),
+        distance : this.roundedDistance,
+        allMarkers: this.allMarkers,
+      }
     }
 
     if(this.allMarkers.length > 1){

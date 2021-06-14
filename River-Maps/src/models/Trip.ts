@@ -1,13 +1,15 @@
 export class Trip {
-    email: String;
-    title: String;
-    description: String;
-    image: String;
+    _id: string;
+    email: string;
+    title: string;
+    description: string;
+    image: string;
     publishDate: Date;
     distance: Number;
     allMarkers: [number, number][];
   
-    constructor(title: String, description = '', publishDate = new Date(), image = '', email = '', allMarkers = [], distance = 0) {
+    constructor(_id: string = '', title: string, description = '', publishDate = new Date(), image = '', email = '', allMarkers = [], distance = 0) {
+      this._id = _id
       this.title = title
       this.description = description
       this.image = image

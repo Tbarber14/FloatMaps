@@ -12,11 +12,13 @@ import { UserTripsService } from '../services/user-trips.service';
 })
 export class SaveMapComponent implements OnInit {
   tripFormGroup: FormGroup | undefined;
+  editTrip:boolean = false;
 
   email: string = '';
   title: string = "";
   description: string = "";
   image: string = "";
+
   trip!: Trip;
   
   constructor(private router: Router, private auth: AuthService, private tripService: UserTripsService) {
@@ -31,14 +33,33 @@ export class SaveMapComponent implements OnInit {
                                       Validators.minLength(2), 
                                       Validators.maxLength(10)]),
       userContact: new FormControl()
-    })
+    });
     
+    this.editTrip = this.tripService.editTrip;
   }
 
 
   handleSubmit() {
 
-    this.tripService.addTrip(this.trip)
+    if(this.editTrip){
+      this.tripService.editTrip = false;
+      this.editTrip = false;
+
+      this.tripService.updateTrip(this.trip)
+      .subscribe(user => {
+        this.router.navigate(['./view']);
+      }, err => {
+        if(err){
+          console.log(err);
+        }
+      })
+    }
+
+    else if(this.editTrip == false){
+      this.tripService.editTrip = false;
+      this.editTrip = false;
+
+      this.tripService.addTrip(this.trip)
       .subscribe(user => {
         this.router.navigate(['./map']);
       }, err => {
@@ -46,6 +67,6 @@ export class SaveMapComponent implements OnInit {
           console.log(err);
         }
       })
+    }
   }
-
 }

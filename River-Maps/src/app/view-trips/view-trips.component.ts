@@ -16,6 +16,7 @@ export class ViewTripsComponent implements OnInit {
 
   constructor(private auth:AuthService, private tripService: UserTripsService, private router: Router) {
     this.email = this.auth.retrieveUser().email;
+ 
    }
 
   ngOnInit(): void {
@@ -27,5 +28,22 @@ export class ViewTripsComponent implements OnInit {
 
   viewDetails(trip: Trip){
     this.tripService.cacheTrip(trip);
+  }
+
+  deleteTrip(trip: Trip){
+    this.tripService.deleteTrip(trip._id)
+      .subscribe(trip => {
+        window.location.reload();
+      }, err => {
+        if(err){
+          console.log(err);
+        }
+      })
+  }
+
+  editTrip(trip: Trip){
+    this.tripService.editTrip = true;
+    this.tripService.cacheTrip(trip);
+    this.router.navigate(['/map']);
   }
 }

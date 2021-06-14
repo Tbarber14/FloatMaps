@@ -36,8 +36,8 @@ export class TripDetailsComponent implements OnInit {
     }
 
     this.getTrip();
-    let centerMap = this.findAverageLocation();
 
+    let centerMap = this.findAverageLocation();
     this.lat = centerMap[0]; 
     this.lng = centerMap[1];
   }
