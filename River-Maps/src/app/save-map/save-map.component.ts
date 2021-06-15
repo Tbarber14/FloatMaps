@@ -58,7 +58,7 @@ export class SaveMapComponent implements OnInit {
     else if(this.editTrip == false){
       this.tripService.editTrip = false;
       this.editTrip = false;
-
+      console.log("The new trip" + this.trip.title);
       this.tripService.addTrip(this.trip)
       .subscribe(user => {
         this.router.navigate(['./map']);

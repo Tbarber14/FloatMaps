@@ -12,28 +12,20 @@ import { UserTripsService } from '../services/user-trips.service';
 export class NavigationComponent implements OnInit {
   event$
   onMap : boolean = true;
-  onDetails : boolean = false;
-  isEdit: boolean = false;
-
-  constructor(private auth: AuthService, private router: Router, private Location: Location, private tripService: UserTripsService) {
+  edit: boolean = false;
+  constructor(private auth: AuthService, private router: Router, private location: Location, private tripService: UserTripsService) {
     this.event$
       =this.router.events
           .subscribe(
             (event: NavigationEvent) => {
               if(event instanceof NavigationEnd) {
-                this.isEdit = this.tripService.editTrip;
-                let location = this.Location.path();
+                let location = this.location.path();
+                this.edit = this.tripService.editTrip;
                 if(location == "/map"){
                   this.onMap = true;
-                  this.onDetails = false;
-                }
-                else if(location == '/details'){
-                  this.onMap = false;
-                  this.onDetails = true;
                 }
                 else{
                   this.onMap = false;
-                  this.onDetails = false;
                 }
               }
             });
@@ -51,9 +43,8 @@ export class NavigationComponent implements OnInit {
     this.auth.removeUser();
   }
 
-  turnOffEdit(){
-    this.tripService.editTrip = false;
-    this.isEdit = false;
+  goBack(){
+    this.edit = false;
+    this.location.back()
   }
-
 }

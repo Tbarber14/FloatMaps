@@ -71,7 +71,8 @@
 
             <!-- submit button -->
             <div class='card-footer' style="text-align: center;">
-                <button class='btn btn-primary' [disabled]='tripForm.invalid' style="background-color: black;" (click) = "handleSubmit()" routerLink = "/map">Save Trip</button>
+                <button class='btn btn-primary' [disabled]='tripForm.invalid' style="background-color: black;" (click) = "handleSubmit()" routerLink = "/map" *ngIf = "!editTrip">Save Trip</button>
+                <button class='btn btn-primary' [disabled]='tripForm.invalid' style="background-color: black;" (click) = "handleSubmit()" *ngIf = "editTrip">Update Trip</button>
             </div>
                 
         </form>

@@ -14,7 +14,7 @@ const updateTripUrl = 'http://localhost:3000/Trips/updateTrip'
 export class UserTripsService {
 
   allMarkers: [number, number][] =[];
-  trip!: Trip;
+  trip!: any;
   distance!: number;
   editTrip:boolean = false;
 
@@ -24,16 +24,8 @@ export class UserTripsService {
     return this.trip;
   }
 
-  cacheTrip(trip: Trip){
+  cacheTrip(trip: any){
     this.trip = trip;
-  }
-  
-  cacheMap(map: [number, number][]){
-    this.allMarkers = map;
-  }
-
-  getMapCache(){
-    return this.allMarkers;
   }
 
   getAllTrips(){
