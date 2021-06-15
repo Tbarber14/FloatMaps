@@ -8,7 +8,7 @@ export class Trip {
     distance: Number;
     allMarkers: [number, number][];
   
-    constructor(_id: string = '', title: string, description = '', publishDate = new Date(), image = '', email = '', allMarkers = [], distance = 0) {
+    constructor(_id: string = "", title: string, description = '', publishDate = new Date(), image = '', email = '', allMarkers = [], distance = 0) {
       this._id = _id
       this.title = title
       this.description = description

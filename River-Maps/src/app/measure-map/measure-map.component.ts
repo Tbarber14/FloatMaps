@@ -101,11 +101,17 @@ export class MeasureMapComponent {
   saveMap(){
 
     if(this.editTrip){
-      var tripInfo = this.tripToEdit;
+      let tripInfo = this.tripToEdit;
+
+      if(this.allMarkers.length > 1){
+        console.log("First Trip info: " + tripInfo);
+        this.tripService.cacheTrip(tripInfo);
+  
+        this.router.navigate(['/save']);
+      }
     }
     else{
-      var tripInfo : Trip = {
-        _id: "",
+      let tripInfo : any = {
         email: this.auth.retrieveUser().email,
         title: this.title,
         description: this.description,
@@ -114,13 +120,16 @@ export class MeasureMapComponent {
         distance : this.roundedDistance,
         allMarkers: this.allMarkers,
       }
+
+      if(this.allMarkers.length > 1){
+        console.log("First Trip info: " + tripInfo.publishDate);
+        this.tripService.cacheTrip(tripInfo);
+  
+        this.router.navigate(['/save']);
+      }
     }
 
-    if(this.allMarkers.length > 1){
-      this.tripService.cacheTrip(tripInfo);
 
-      this.router.navigate(['/save']);
-    }
   }
 
   // Finds the distance of all points recorded in the allMarkers array by order they were pushed to the array
