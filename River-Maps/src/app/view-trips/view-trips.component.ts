@@ -46,4 +46,11 @@ export class ViewTripsComponent implements OnInit {
     this.tripService.cacheTrip(trip);
     this.router.navigate(['/map']);
   }
+
+  calculateTimeEstimate(distance:any){
+    let timeEstimateLow =  Math.round(distance / 1.6);
+    let timeEstimateHigh = Math.round(timeEstimateLow + (timeEstimateLow / 2))  ;
+
+    return [timeEstimateLow, timeEstimateHigh];
+  }
 }
