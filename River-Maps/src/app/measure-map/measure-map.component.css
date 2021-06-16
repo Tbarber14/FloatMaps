@@ -5,3 +5,7 @@ agm-map {
 .btn{
   position:absolute
 }
+
+#search{
+  width:55%;
+}
