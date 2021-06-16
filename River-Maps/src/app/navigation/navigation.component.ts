@@ -40,6 +40,9 @@ export class NavigationComponent implements OnInit {
   }
 
   signOut(){
+    this.edit = false;
+    this.tripService.editTrip = false;
+    this.tripService.clearTripCache();
     this.auth.removeUser();
   }
 
