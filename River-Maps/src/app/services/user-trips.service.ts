@@ -28,6 +28,10 @@ export class UserTripsService {
     this.trip = trip;
   }
 
+  clearTripCache(){
+    this.trip = null;
+  }
+
   getAllTrips(){
     return this.http.get(allTripsUrl);
   }
