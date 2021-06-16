@@ -44,7 +44,13 @@ export class NavigationComponent implements OnInit {
   }
 
   goBack(){
-    this.edit = false;
+    let location = this.location.path();
+    if(location != "/save"){
+      this.edit = false;
+      this.tripService.editTrip = false;
+      this.tripService.clearTripCache();
+    }
+
     this.location.back()
   }
 }
