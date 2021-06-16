@@ -1,3 +1,5 @@
+import { MapsAPILoader } from '@agm/core';
+import { ElementRef, NgZone, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
@@ -13,12 +15,20 @@ import { UserTripsService } from '../services/user-trips.service';
 
 export class MeasureMapComponent {
 
+  @ViewChild('search')
+  public searchElementRef!: ElementRef;
+  
   allMarkers: [number, number][] =[];
   tripToEdit!: Trip;
 
   //Default coords
   lat = 36.1627;
   lng = -86.7816;
+  zoom!: number;
+  address!: string;
+  private geoCoder!: google.maps.Geocoder;
+  map!: google.maps.Map<Element>;
+
   roundedDistance: number = 0;
   markersPlaced: boolean = false;
   editTrip: boolean = false;
@@ -28,12 +38,9 @@ export class MeasureMapComponent {
   description: string = "";
   image: string = "";
 
-
-  map!: google.maps.Map<Element>;
-
-  constructor(private readonly geolocation$: GeolocationService, private auth: AuthService, private router:Router, private tripService: UserTripsService){
+  constructor(private readonly geolocation$: GeolocationService, private auth: AuthService, private router:Router, private tripService: UserTripsService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone){
     // Finds the users coordinates
-    geolocation$.subscribe(position => {this.lat = position.coords.latitude; this.lng = position.coords.longitude});
+
   }
 
   ngOnInit(): void {
@@ -53,11 +60,41 @@ export class MeasureMapComponent {
     else{
       this.editTrip = false;
     }
+
+    // All of the below in the init function is for the search bar that will need to be enabled with Google Cloud Billing
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder;
+
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+  }
+
+  setCurrentLocation(){
+    this.geolocation$.subscribe(position => {this.lat = position.coords.latitude; this.lng = position.coords.longitude});
   }
   
   //Initializes map
   mapReady(event: any) {
     this.map = event;
+    this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('search')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('milesBanner')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('SaveMap')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DeleteLast')  as HTMLInputElement);

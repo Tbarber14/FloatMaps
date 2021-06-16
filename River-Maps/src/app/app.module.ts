@@ -35,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAFE8E_qEMKLVh8xWJkcLNJfQa3_-eQOsU'
+      apiKey: 'AIzaSyAFE8E_qEMKLVh8xWJkcLNJfQa3_-eQOsU',
+      libraries: ["places"]
     }),
     NgbModule
   ],
