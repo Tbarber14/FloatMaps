@@ -16,6 +16,10 @@ import { SaveMapComponent } from './save-map/save-map.component';
 import { ViewTripsComponent } from './view-trips/view-trips.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { EditUserDetailsComponent } from './edit-user-details/edit-user-details.component';
+import { ViewUserSelectTripsComponent } from './view-user-select-trips/view-user-select-trips.component';
+import { LoginChangeComponent } from './login-change/login-change.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginHeaderComponent,
     SaveMapComponent,
     ViewTripsComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    UserDetailsComponent,
+    EditUserDetailsComponent,
+    ViewUserSelectTripsComponent,
+    LoginChangeComponent
   ],
   imports: [
     BrowserModule,
