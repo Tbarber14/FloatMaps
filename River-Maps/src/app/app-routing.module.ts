@@ -5,6 +5,7 @@ import { MeasureMapComponent } from './measure-map/measure-map.component';
 import { RegisterComponent } from './register/register.component';
 import { SaveMapComponent } from './save-map/save-map.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 import { ViewTripsComponent } from './view-trips/view-trips.component';
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:"details",
     component: TripDetailsComponent
+  },
+  {
+    path:"userDetails",
+    component: UserDetailsComponent
   },
   {
     path:"**",

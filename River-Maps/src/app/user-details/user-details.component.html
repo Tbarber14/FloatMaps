@@ -1,0 +1,47 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-lg-4" *ngIf = "edit">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <div class="mt-3">
+                                <h4>Full Name</h4>
+                                <p class="text-secondary mb-1">@Username</p>
+                                <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-outline-primary">Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12" *ngIf = "!edit">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <div class="mt-3">
+                                <h4>Full Name</h4>
+                                <p class="text-secondary mb-1">@Username</p>
+                                <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-outline-primary">Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-8" *ngIf = "edit">
+                <app-edit-user-details></app-edit-user-details>
+                <app-login-change></app-login-change>
+            </div>
+
+            <div class="container" *ngIf = "!edit">
+                <app-view-user-select-trips></app-view-user-select-trips>
+            </div>
+        </div>
+    </div>
+</div>
