@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LandingMapComponent } from './landing-map/landing-map.component';
 import { LoginComponent } from './login/login.component';
 import { MeasureMapComponent } from './measure-map/measure-map.component';
 import { RegisterComponent } from './register/register.component';
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path:"map",
     component: MeasureMapComponent
+  },
+  {
+    path:"lander",
+    component: LandingMapComponent
   },
   {
     path:"save",

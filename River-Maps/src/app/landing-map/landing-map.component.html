@@ -1,0 +1,24 @@
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng" [clickableIcons] = "false" [mapTypeControl]="true" [disableDefaultUI] = "true" [fitBounds]="true" (mapReady)="mapReady($event)">
+    <div class="card" id = "milesBanner" style="height: 3rem; width: 8rem; margin-top: 5px;">
+        <p>Search Radius</p>
+        <select id="searchRadius">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+    <agm-marker  *ngFor = "let trip of allTrips" 
+        [latitude]="trip.allMarkers[0][0]" 
+        [longitude]="trip.allMarkers[0][1]"
+        [agmFitBounds]="true"
+        [markerClickable] ="true"
+        [label] = "trip.title"
+        (markerClick) = "openTripDetails(trip)">
+    </agm-marker>
+    <button id = "CreateTrip" class="toggle-button controls button btn btn-light btn-circle" (click) = "goToCreateTrip()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-plus" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg></button>
+</agm-map>

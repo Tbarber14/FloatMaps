@@ -20,6 +20,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { EditUserDetailsComponent } from './edit-user-details/edit-user-details.component';
 import { ViewUserSelectTripsComponent } from './view-user-select-trips/view-user-select-trips.component';
 import { LoginChangeComponent } from './login-change/login-change.component';
+import { LandingMapComponent } from './landing-map/landing-map.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoginChangeComponent } from './login-change/login-change.component';
     UserDetailsComponent,
     EditUserDetailsComponent,
     ViewUserSelectTripsComponent,
-    LoginChangeComponent
+    LoginChangeComponent,
+    LandingMapComponent
   ],
   imports: [
     BrowserModule,
