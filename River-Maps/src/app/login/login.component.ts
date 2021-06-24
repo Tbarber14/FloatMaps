@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.userservice.login(loginAdmin)
       .subscribe(user => {
         this.auth.storeUser(user);
-        this.router.navigate(['./map']);
+        this.router.navigate(['./lander']);
       }, err => {
         if(err){
           this.error = true;

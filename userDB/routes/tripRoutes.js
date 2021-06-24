@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Trips = require('../models/UserTrips');
 
+//Gets all trips
 router.get('/getTrips', (req, res) => {
     Trips.find((err, result) => {
         if(err) throw err;
@@ -8,6 +9,7 @@ router.get('/getTrips', (req, res) => {
     })
 })
 
+//Gets trips by email
 router.get('/yourTrips/:email', (req, res) => {
     console.log("Email: ")
     console.log(req.params.email);
@@ -18,6 +20,7 @@ router.get('/yourTrips/:email', (req, res) => {
     })
 })
 
+//Adds new trips
 router.post('/addTrips', (req, res) => {
   console.log("req.body = ",req.body)
   Trips.create(req.body, (err, result) => {
