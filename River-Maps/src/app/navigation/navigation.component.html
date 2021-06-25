@@ -8,12 +8,12 @@
 <body>
     <div class="navbar navbar-fixed-top">
         <div class="navbar-header pull-left">
-          <button type="button" class="btn btn-link pull-left text-primary" *ngIf = "!onMap || edit" (click) = "goBack()">
+          <button type="button" class="btn btn-link pull-left text-primary" *ngIf = "!onLandMap || edit" (click) = "goBack()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg>
           </button>
-          <h1 class="navbar-brand text-primary" >Float Maps</h1>
+          <a class="navbar-brand text-primary" href = "#" routerLink='/lander'>Float Maps</a>
         </div>
         <div class="nav-item">
           <div class="btn btn-default navbar-btn">
@@ -22,7 +22,9 @@
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
               </svg></button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/view' *ngIf = "onMap == true">Trips</button>
+                <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/lander' *ngIf = "!onLandMap">Discover</button>
+                <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/map' *ngIf = "!onCreate">Create</button>
+                <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/view' *ngIf = "onView != true">My Trips</button>
                 <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/login' (click) = "signOut()">Logout</button>
               </div>
             </div>
