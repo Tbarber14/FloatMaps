@@ -11,7 +11,9 @@ import { UserTripsService } from '../services/user-trips.service';
 })
 export class NavigationComponent implements OnInit {
   event$
-  onMap : boolean = true;
+  onLandMap : boolean = true;
+  onCreate: boolean = false;
+  onView: boolean = false;
   edit: boolean = false;
   constructor(private auth: AuthService, private router: Router, private location: Location, private tripService: UserTripsService) {
     this.event$
@@ -21,11 +23,24 @@ export class NavigationComponent implements OnInit {
               if(event instanceof NavigationEnd) {
                 let location = this.location.path();
                 this.edit = this.tripService.editTrip;
-                if(location == "/map"){
-                  this.onMap = true;
+                if(location == "/lander"){
+                  this.onLandMap = true;
+                  this.onView = false;
+                  this.onCreate = false;
                 }
                 else{
-                  this.onMap = false;
+                  this.onLandMap = false;
+                  this.onView = false;
+                  this.onCreate = false;
+                }
+
+                if(location == "/view")
+                {
+                  this.onView = true;
+                }
+
+                if(location == "/map"){
+                  this.onCreate = true;
                 }
               }
             });

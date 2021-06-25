@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginHeaderComponent } from './login-header/login-header.component';
 import { SaveMapComponent } from './save-map/save-map.component';
 import { ViewTripsComponent } from './view-trips/view-trips.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
@@ -29,7 +28,6 @@ import { LandingMapComponent } from './landing-map/landing-map.component';
     NavigationComponent,
     LoginComponent,
     RegisterComponent,
-    LoginHeaderComponent,
     SaveMapComponent,
     ViewTripsComponent,
     TripDetailsComponent,
