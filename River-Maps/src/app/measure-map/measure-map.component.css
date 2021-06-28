@@ -1,9 +1,12 @@
+
 agm-map {
     height: 90vh;
   }
 
 .btn{
-  position:absolute
+  position:absolute;
+  margin-bottom: 15px;
+  margin-right: 10px;
 }
 
 #search{

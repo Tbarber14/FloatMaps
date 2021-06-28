@@ -46,7 +46,7 @@ export class LandingMapComponent implements OnInit {
     //Initializes map
     mapReady(event: any) {
       this.map = event;
-      this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('milesBanner')  as HTMLInputElement);
+      this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('milesBanner')  as HTMLInputElement);
       this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('CreateTrip')  as HTMLInputElement);
   }
 
@@ -80,5 +80,9 @@ export class LandingMapComponent implements OnInit {
 
   goToCreateTrip(){
     this.router.navigate(["map"]);
+  }
+
+  goToListTrips(){
+    this.router.navigate(["view"]);
   }
 }
