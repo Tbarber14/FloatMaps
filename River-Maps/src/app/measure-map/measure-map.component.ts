@@ -92,7 +92,7 @@ export class MeasureMapComponent {
   }
 
   centerOnLocation(){
-    this.setCurrentLocation();
+    this.map.setCenter({ lat: this.lat, lng: this.lng });
   }
   
   //Initializes map
