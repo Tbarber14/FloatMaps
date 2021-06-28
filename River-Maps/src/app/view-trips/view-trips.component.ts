@@ -53,4 +53,8 @@ export class ViewTripsComponent implements OnInit {
 
     return [timeEstimateLow, timeEstimateHigh];
   }
+
+  goToMap(){
+    this.router.navigate(['/lander']);
+  }
 }

@@ -90,15 +90,22 @@ export class MeasureMapComponent {
   setCurrentLocation(){
     this.geolocation$.subscribe(position => {this.lat = position.coords.latitude; this.lng = position.coords.longitude});
   }
+
+  centerOnLocation(){
+    this.setCurrentLocation();
+  }
   
   //Initializes map
   mapReady(event: any) {
     this.map = event;
-    this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('search')  as HTMLInputElement);
+    // For google places search
+    //this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('search')  as HTMLInputElement);
+
     this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('milesBanner')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('SaveMap')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DeleteLast')  as HTMLInputElement);
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DeleteAll')  as HTMLInputElement);
+    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('centerOnLocation')  as HTMLInputElement);
     document.getElementById('distanceTotal')!.innerHTML = this.distanceBanner + " miles";
 }
 
