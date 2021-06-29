@@ -24,6 +24,7 @@
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/lander' *ngIf = "!onLandMap">My Trips</button>
                 <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/map' *ngIf = "!onCreate">Create</button>
+                <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/userDetails' *ngIf = "!onUserDetails">User Details</button>
                 <button ngbDropdownItem type="button" class="btn btn-default navbar-btn" routerLink='/login' (click) = "signOut()">Logout</button>
               </div>
             </div>

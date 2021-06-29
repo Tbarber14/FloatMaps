@@ -17,7 +17,6 @@ import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { EditUserDetailsComponent } from './edit-user-details/edit-user-details.component';
-import { ViewUserSelectTripsComponent } from './view-user-select-trips/view-user-select-trips.component';
 import { LoginChangeComponent } from './login-change/login-change.component';
 import { LandingMapComponent } from './landing-map/landing-map.component';
 
@@ -33,7 +32,6 @@ import { LandingMapComponent } from './landing-map/landing-map.component';
     TripDetailsComponent,
     UserDetailsComponent,
     EditUserDetailsComponent,
-    ViewUserSelectTripsComponent,
     LoginChangeComponent,
     LandingMapComponent
   ],

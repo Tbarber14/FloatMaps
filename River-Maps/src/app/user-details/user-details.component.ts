@@ -10,7 +10,8 @@ import { AuthService } from '../services/auth.service';
 export class UserDetailsComponent implements OnInit {
 
   currentUserEmail!: String;
-  edit: boolean = false;
+  isCollapsedDetails:boolean = true;
+  isCollapsedPass:boolean = true;
 
   constructor(private auth: AuthService, private router:Router) { }
 
@@ -22,13 +23,4 @@ export class UserDetailsComponent implements OnInit {
 
         this.currentUserEmail = this.auth.retrieveUser().email;
   }
-
-  editDetails(){
-    this.edit = true;
-  }
-
-  disableEditDetails(){
-    this.edit = false;
-  }
-
 }
