@@ -14,6 +14,7 @@ export class NavigationComponent implements OnInit {
   onLandMap : boolean = true;
   onCreate: boolean = false;
   onView: boolean = false;
+  onUserDetails: boolean = false;
   edit: boolean = false;
   constructor(private auth: AuthService, private router: Router, private location: Location, private tripService: UserTripsService) {
     this.event$
@@ -27,11 +28,13 @@ export class NavigationComponent implements OnInit {
                   this.onLandMap = true;
                   this.onView = false;
                   this.onCreate = false;
+                  this.onUserDetails = false;
                 }
                 else{
                   this.onLandMap = false;
                   this.onView = false;
                   this.onCreate = false;
+                  this.onUserDetails = false;
                 }
 
                 if(location == "/view")
@@ -41,6 +44,10 @@ export class NavigationComponent implements OnInit {
 
                 if(location == "/map"){
                   this.onCreate = true;
+                }
+
+                if(location == "/userDetails"){
+                  this.onUserDetails = true;
                 }
               }
             });

@@ -46,12 +46,18 @@ export class LandingMapComponent implements OnInit {
     //Initializes map
     mapReady(event: any) {
       this.map = event;
+  
       this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('milesBanner')  as HTMLInputElement);
       this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('CreateTrip')  as HTMLInputElement);
+      this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('centerOnLocation')  as HTMLInputElement);
   }
 
   setCurrentLocation(){
     this.geolocation$.subscribe(position => {this.lat = position.coords.latitude; this.lng = position.coords.longitude});
+  }
+
+  centerOnLocation(){
+    this.map.setCenter({ lat: this.lat, lng: this.lng });
   }
 
   findAverageLocation(){
