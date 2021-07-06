@@ -20,12 +20,13 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  const { name, email, username, password } = req.body
+  const { name, email, phone, username, password } = req.body
 
   const user = new User()
 
   user.name = name
   user.email = email
+  user.phone = phone
   user.username = username
 
   user.genPasswordHash(password)
@@ -33,6 +34,63 @@ router.post('/register', (req, res) => {
   user.save()
     .then(newUser => res.json(newUser.genUserObj()))
     .catch(err => res.status(500).json(err))
+})
+
+router.put('/updateDetails', (req, res) => {
+  const { name, email, phone, username, password } = req.body
+
+  const user = new User()
+
+  user.name = name
+  user.email = email
+  user.phone = phone
+  user.username = username
+
+  user.genPasswordHash(password)
+
+  user.save()
+    .then(newUser => res.json(newUser.genUserObj()))
+    .catch(err => res.status(500).json(err))
+})
+
+router.put('/updatePass', (req, res) => {
+  const { username, password } = req.body
+
+  const user = new User()
+
+  user.username = username
+
+  user.genPasswordHash(password)
+
+   User.findOne({ username },{
+    $set:{
+      password: user.UserSchema.passwordHash
+    }
+},{
+    upsert:true
+},(err,result) => {
+    if(err) return res.send(err);
+    res.send(result)
+})
+})
+
+router.put('/updateTrip/:id', (req, res) => {
+  let id = req.params.id;
+  Trips.findByIdAndUpdate(id,{
+          $set:{
+              title: req.body.title,
+              description: req.body.description,
+              image: req.body.image,
+              publishDate: req.body.publishDate,
+              distance: req.body.distance,
+              allMarkers: req.body.allMarkers
+          }
+      },{
+          upsert:true
+      },(err,result) => {
+          if(err) return res.send(err);
+          res.send(result)
+      })
 })
 
 module.exports = router;

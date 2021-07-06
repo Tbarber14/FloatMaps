@@ -12,7 +12,8 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService, private user: UserService) { }
 
   usersName: string = '';
-  email: string = ''; 
+  email: string = '';
+  phone: string = '';
   password: string = '';
   confirmPassword: string ='';
 
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
     let newAdmin = {
       email: this.email,
       name: this.usersName,
+      phone: this.phone,
       username: this.email,
       password: this.password
     }
