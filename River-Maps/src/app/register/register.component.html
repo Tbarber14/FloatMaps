@@ -53,6 +53,27 @@
                 </span>
             </div>
 
+            <div class='form-group'>
+                <label for='phone'>Phone</label>
+
+                <input 
+                    class='form-control'
+                    type='text'
+                    id='phone'
+                    name='phone'
+                    #phoneNumb='ngModel'
+                    [ngClass]="{ 'is-invalid': phoneNumb.touched && phoneNumb.invalid}"
+                    required
+                    phone
+                    [(ngModel)]='phone'/>
+                                <!-- error handling for username-->
+                 <span *ngIf='phoneNumb.touched && phoneNumb.invalid && phoneNumb.errors?.required' class='invalid-feedback'>
+                    Phone number is required.
+                </span>
+                <span *ngIf='phoneNumb.touched && phoneNumb.invalid && phoneNumb.errors?.phone' class='invalid-feedback'>
+                    A proper phone number is required.
+                </span>
+            </div>
 
 
             <!-- password-->
