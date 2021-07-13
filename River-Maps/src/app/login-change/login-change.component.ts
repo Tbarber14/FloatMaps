@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -11,26 +12,29 @@ export class LoginChangeComponent implements OnInit {
   currentPass: string ='';
   newPass: string ='';
   newPassCheck: string = '';
+  currentUser: string ='';
 
-  constructor(private user: UserService) { }
+  constructor(private user: UserService, private auth: AuthService) {
+    this.currentUser = auth.retrieveUser().email;
+   }
 
   ngOnInit(): void {
   }
 
-  updateUser(){
+  updatePass(){
     console.log(this.currentPass, this.newPass, this.newPassCheck);
-    //Registers new user using data from html form
-    // let updatedUser = {
-    //   email: this.currentPass,
-    //   name: this.currentPass,
-    //   phone: this.currentPass
-    // }
+    // Registers new user using data from html form
+    let updatedUserPass = {
+      email: this.currentUser,
+      password: this.currentPass,
+      newPass: this.newPass
+    }
     
-    // this.user.updateDetails(updatedUser).subscribe(
-    //   (response=> {
-    //     console.log("user was edited")
-    //   }
-    // ));
+    this.user.updatePassword(updatedUserPass).subscribe(
+      (response=> {
+        console.log("password was updated")
+      }
+    ));
   }
 
 }

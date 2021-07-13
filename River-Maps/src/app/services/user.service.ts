@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { AuthService } from './auth.service';
 
 // If in docker url should be server instead of localhost
 const loginUrl = 'http://localhost:3000/Admin/login'
@@ -12,7 +13,15 @@ const passUrl = 'http://localhost:3000/Admin/updatePass'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  currentUser: string = "";
+
+  constructor(private http: HttpClient, private auth: AuthService) {
+
+    if(this.auth.retrieveUser() != null){
+      this.currentUser = this.auth.retrieveUser().email
+    }
+    
+   }
 
   login(creds: any) {
     return this.http.post(loginUrl, creds)
@@ -29,7 +38,7 @@ export class UserService {
 
   updateDetails(data: any){
     console.log(data);
-    return this.http.put(detailsUrl, data)
+    return this.http.put(detailsUrl + '/' + this.currentUser, data)
   }
 
   updatePassword(data: any){

@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema ({
 UserSchema.methods.genPasswordHash = function (password) {
    const salt = bcrypt.genSaltSync(10)
    this.passwordHash = bcrypt.hashSync(password, salt)
+   return this.passwordHash;
 }
 
 UserSchema.methods.comparePasswordHash = function (password) {
