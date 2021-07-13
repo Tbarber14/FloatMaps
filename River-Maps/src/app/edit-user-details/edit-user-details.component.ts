@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -7,12 +8,13 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./edit-user-details.component.css']
 })
 export class EditUserDetailsComponent implements OnInit {
-
+  currentUser: string = '';
   newName: string = '';
   newEmail: string = ''; 
   newPhone: string = '';
 
-  constructor(private user: UserService) { }
+  constructor(private user: UserService) {
+   }
 
   ngOnInit(): void {
   }
@@ -20,17 +22,19 @@ export class EditUserDetailsComponent implements OnInit {
   updateUser(){
     //Registers new user using data from html form
     let updatedUser = {
-      email: this.newName,
-      name: this.newEmail,
+      email: this.newEmail,
+      name: this.newName ,
       phone: this.newPhone
     }
     
     console.log(updatedUser.email, updatedUser.name, updatedUser.phone)
-    // this.user.updateDetails(updatedUser).subscribe(
-    //   (response=> {
-    //     console.log("user was edited")
-    //   }
-    // ));
+    this.user.updateDetails(updatedUser).subscribe(
+      (response=> {
+        console.log("user was edited")
+      }
+    ));
   }
+
+
 
 }
