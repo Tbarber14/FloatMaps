@@ -47,10 +47,6 @@ export class LandingMapComponent implements OnInit {
       this.allTrips = trips as unknown as Trip[]
     })
 
-    if(this.allTrips == []){
-      
-      this.centerOnLocation();
-    }
   }
 
     //Initializes map

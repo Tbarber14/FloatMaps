@@ -67,4 +67,19 @@ router.put('/updateTrip/:id', (req, res) => {
         })
 })
 
+router.put('/updateTripEmail/:oldEmail', (req, res) => {
+    console.log(req.params.oldEmail);
+    let currentUserEmail = req.params.oldEmail;
+    Trips.updateMany({email: currentUserEmail},{
+            $set:{
+                    email: req.body.email
+            }
+        },{
+            upsert:true
+        },(err,result) => {
+            if(err) return res.send(err);
+            res.send(result)
+        })
+})
+
 module.exports = router;
