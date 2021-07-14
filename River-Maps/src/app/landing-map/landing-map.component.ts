@@ -11,6 +11,7 @@ import { UserTripsService } from '../services/user-trips.service';
   styleUrls: ['./landing-map.component.css']
 })
 export class LandingMapComponent implements OnInit {
+  currentUser: String = "";
   allTrips: Trip[] = [];
   allTripsStartLocations!: [number, number][]
 
@@ -35,18 +36,27 @@ export class LandingMapComponent implements OnInit {
     if(this.auth.retrieveUser() == null){
       this.router.navigate(['/login']);
     }
+    else{
+      this.currentUser = this.auth.retrieveUser().email;
+    }
 
-    this.setCurrentLocation();
+    // Finds users geolocation
+    this.setCurrentLocation()
 
-    this.tripService.getAllTrips().subscribe(trips => {
+    this.tripService.findTripByEmail(this.currentUser).subscribe(trips => {
       this.allTrips = trips as unknown as Trip[]
     })
+
+    if(this.allTrips == []){
+      
+      this.centerOnLocation();
+    }
   }
 
     //Initializes map
     mapReady(event: any) {
       this.map = event;
-  
+
       this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('milesBanner')  as HTMLInputElement);
       this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('CreateTrip')  as HTMLInputElement);
       this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('centerOnLocation')  as HTMLInputElement);
