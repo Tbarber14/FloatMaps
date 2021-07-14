@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { UserTripsService } from '../services/user-trips.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -8,15 +9,16 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./edit-user-details.component.css']
 })
 export class EditUserDetailsComponent implements OnInit {
-  currentUser: string = '';
+  currentUser!: any;
   newName: string = '';
   newEmail: string = ''; 
   newPhone: string = '';
 
-  constructor(private user: UserService) {
+  constructor(private user: UserService, private tripService: UserTripsService, private auth: AuthService) {
    }
 
   ngOnInit(): void {
+    this.currentUser = this.auth.retrieveUser();
   }
 
   updateUser(){
@@ -31,8 +33,20 @@ export class EditUserDetailsComponent implements OnInit {
     this.user.updateDetails(updatedUser).subscribe(
       (response=> {
         console.log("user was edited")
+
+        this.tripService.updateTripEmail(updatedUser).subscribe(
+          (response=> {
+            console.log("trips were updated")
+          }
+        ));
+
+        this.currentUser.email = updatedUser.email;
+        this.auth.storeUser(this.currentUser);
+        
       }
     ));
+
+
   }
 
 
